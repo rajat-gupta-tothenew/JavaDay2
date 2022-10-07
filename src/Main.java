@@ -7,8 +7,8 @@ import java.util.Scanner;
 enum AccountType {
     SAVINGS, CURRENT
 }
-class InsufficientAmountExceptiion extends Exception {
-    public InsufficientAmountExceptiion (String str) {
+class InsufficientAmountException extends Exception {
+    public InsufficientAmountException (String str) {
         super(str);
     }
 }
@@ -66,9 +66,9 @@ class SBI extends Bank {
         System.out.println("Balance after the deposit is: " + balance);
     }
 
-    public void withdraw(long amount) throws InsufficientAmountExceptiion {
+    public void withdraw(long amount) throws InsufficientAmountException {
         if (amount > balance) {
-            throw new InsufficientAmountExceptiion("Required balance is less than the amount you wish to withdraw");
+            throw new InsufficientAmountException("Required balance is less than the amount you wish to withdraw");
         } else {
             balance -= amount;
             System.out.println("Balance after the withdrawal: " + balance);
@@ -109,9 +109,9 @@ class BOI extends Bank {
         System.out.println("Balance after the deposit is: "+balance);
     }
 
-    public void withdraw(long amount) throws InsufficientAmountExceptiion {
+    public void withdraw(long amount) throws InsufficientAmountException {
         if (amount > balance) {
-            throw new InsufficientAmountExceptiion("Required balance is less than the amount you wish to withdraw");
+            throw new InsufficientAmountException("Required balance is less than the amount you wish to withdraw");
         } else {
             balance -= amount;
             System.out.println("Balance after the withdrawal: "+balance);
@@ -152,9 +152,9 @@ class ICICI extends Bank {
         System.out.println("Balance after the deposit is: "+balance);
     }
 
-    public void withdraw(long amount) throws InsufficientAmountExceptiion {
+    public void withdraw(long amount) throws InsufficientAmountException {
         if (amount > balance) {
-            throw new InsufficientAmountExceptiion("Required balance is less than the amount you wish to withdraw");
+            throw new InsufficientAmountException("Required balance is less than the amount you wish to withdraw");
         } else {
             balance -= amount;
             System.out.println("Balance after the withdrawal: "+balance);
@@ -274,7 +274,7 @@ public class Main {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                        } catch (InsufficientAmountExceptiion e) {
+                        } catch (InsufficientAmountException e) {
                             timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
                             f = "\nTime of transaction: "+timeStamp+"\tAccount number: "+sbiAccount.accountNumber+"\tAmount withdrawn: "+0+"\tAmount before withdrawal: "+iciciAccount.balance+"\tCurrent Balance: "+iciciAccount.balance+"\tTrx status: Failure"+"\tFailure reason: Less balance than amount to be withdrawn";
                             b = f.getBytes();
@@ -304,7 +304,7 @@ public class Main {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                        } catch (InsufficientAmountExceptiion e) {
+                        } catch (InsufficientAmountException e) {
                             timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
                             f = "\nTime of transaction: "+timeStamp+"\tAccount number: "+boiAccount.accountNumber+"\tAmount withdrawn: "+0+"\tAmount before withdrawal: "+boiAccount.balance+"\tCurrent Balance: "+boiAccount.balance+"\tTrx status: Failure"+"\tFailure reason: Less balance than amount to be withdrawn";
                             b = f.getBytes();
@@ -328,18 +328,18 @@ public class Main {
                             f = "\nTime of transaction: "+timeStamp+"\tAccount number: "+iciciAccount.accountNumber+"\tAmount withdrawn: "+withdrawAmount+"\tAmount before withdrawal: "+(iciciAccount.balance+withdrawAmount)+"\tCurrent Balance: "+iciciAccount.balance+"\tTrx status: Success"+"\tFailure reason: --";
                             b = f.getBytes();
                             try {
-                                FileOutputStream fout = new FileOutputStream("/home/sharda/Documents/Introjava2/iciciLogs.txt");
+                                FileOutputStream fout = new FileOutputStream("/home/rajat/IdeaProjects/Java_2/iciciLogs.txt");
                                 fout.write(b);
                                 fout.close();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                        } catch (InsufficientAmountExceptiion e) {
+                        } catch (InsufficientAmountException e) {
                             timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
                             f = "\nTime of transaction: "+timeStamp+"\tAccount number: "+iciciAccount.accountNumber+"\tAmount withdrawn: "+0+"\tAmount before withdrawal: "+iciciAccount.balance+"\tCurrent Balance: "+iciciAccount.balance+"\tTrx status: Failure"+"\tFailure reason: Less balance than amount to be withdrawn";
                             b = f.getBytes();
                             try {
-                                FileOutputStream fout = new FileOutputStream("/home/sharda/Documents/Introjava2/iciciLogs.txt");
+                                FileOutputStream fout = new FileOutputStream("/home/rajat/IdeaProjects/Java_2/iciciLogs.txt");
                                 fout.write(b);
                                 fout.close();
                             } catch (Exception ex) {
